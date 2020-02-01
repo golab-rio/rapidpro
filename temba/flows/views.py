@@ -2145,17 +2145,3 @@ class FlowLabelCRUDL(SmartCRUDL):
                 obj.toggle_label(flows, add=True)
 
             return obj
-
-
-class MailroomCompletion(View):
-    """
-    Provides completion to the new editor
-    """
-
-    def get(self, *args, **kwargs):
-        try:
-            file = open(f"{settings.MEDIA_ROOT}/mr/{self.request.GET.get('category')}.json", "r", encoding="utf-8")
-            response = file.read()
-        except Exception:
-            response = {}
-        return JsonResponse(response, safe=False)
