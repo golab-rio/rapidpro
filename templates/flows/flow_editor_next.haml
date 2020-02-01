@@ -202,8 +202,8 @@
         activity: '/flow/activity/{{object.uuid}}/',
         recipients: '/contact/omnibox?v=2&types=gc',
 
-        completion: '/mr/docs/completion.json',
-        functions: '/mr/docs/functions.json',
+        completion: '/flow/mailroom/completion/?category=completion',
+        functions: '/flow/mailroom/completion/?category=functions',
 
         {% if can_simulate %}
         simulateStart: '/flow/simulate/{{object.id}}/',

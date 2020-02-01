@@ -30,7 +30,7 @@ from django.utils import timezone
 from django.utils.encoding import force_text
 from django.utils.translation import ugettext_lazy as _
 from django.views.decorators.csrf import csrf_exempt
-from django.views.generic import FormView
+from django.views.generic import FormView, View
 
 from temba import mailroom
 from temba.archives.models import Archive
@@ -2145,3 +2145,17 @@ class FlowLabelCRUDL(SmartCRUDL):
                 obj.toggle_label(flows, add=True)
 
             return obj
+
+
+class MailroomCompletion(View):
+    """
+    Provides completion to the new editor
+    """
+
+    def get(self, *args, **kwargs):
+        try:
+            file = open(f"{settings.MEDIA_ROOT}/mr/{self.request.GET.get('category')}.json", "r", encoding="utf-8")
+            response = file.read()
+        except Exception:
+            response = {}
+        return JsonResponse(response, safe=False)
